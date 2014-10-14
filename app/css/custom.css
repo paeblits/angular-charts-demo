@@ -1,0 +1,33 @@
+/* Custom CSS styles */
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.box {
+	border: 1px solid #ccc;
+}
+
+.controls {
+  margin: 10px 20px;
+}
+

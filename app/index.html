@@ -2,13 +2,180 @@
 <html lang="en" >
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
-  <link rel="stylesheet" href="css/app.css"/>
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <title>Elite Charts</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- AJAX -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <!-- Custom CSS -->
+  <link href="css/custom.css" rel="stylesheet">
 </head>
+
 <body>
-  <div ng-controller="MyCtrl1" id="chartdiv"></div>
- <div>Angular seed app: v<span app-version></span></div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Elite Charts</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  <li>
+                      <a href="#">About</a>
+                  </li>
+                  <li>
+                      <a href="#">Services</a>
+                  </li>
+                  <li>
+                      <a href="#">Contact</a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+      <div class="row">
+
+          <div class="col-sm-2">
+              <p class="lead" style="margin-left: 5px">Charts</p>
+              <div class="list-group">
+                  <a href="#" class="list-group-item">Gauge</a>
+                  <a href="#" class="list-group-item">Bar</a>
+                  <a href="#" class="list-group-item">Scatter</a>
+                  <a href="#" class="list-group-item">Line</a>
+                  <a href="#" class="list-group-item">Image</a>
+              </div>
+          </div>
+
+          <div class="col-md-8">
+
+              <div class="row">
+                  <div class="col-sm-6 box" ng-controller="LineChartCtrl">
+
+                      <h4 class="text-center" style="margin-bottom: 20px">Line Chart</h4>
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-primary btn-xs" style="display: block; margin: 0 auto" data-toggle="modal" data-target="#optionsModal">
+                          View Options
+                      </button>
+                      <div class="controls">
+                        <a ng-click="increaseSpeed()" class="plus-minus btn btn-xs btn-default">+</a>
+                        <a ng-click="decreaseSpeed()" class="plus-minus btn btn-xs btn-default">-</a>
+                        <p class="rate"><strong>{{ 1/(interval/1000) }} Hz</strong> = {{ interval }} ms = {{ interval/1000 }} s</p>
+                    </div>
+                      <div id="line_chart" style="width: 100%; height: 400px;"></div>
+                  </div>
+                  <div class="col-sm-6 box" ng-controller="ScatterChartCtrl">
+                      <h4 class="text-center" style="margin-bottom: 20px">Scatter Chart</h4>
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-primary btn-xs" style="display: block; margin: 0 auto" data-toggle="modal" data-target="#optionsModal">
+                          View Options
+                      </button>
+                      <div class="controls">
+                        <a ng-click="increaseSpeed()" class="plus-minus btn btn-xs btn-default">+</a>
+                        <a ng-click="decreaseSpeed()" class="plus-minus btn btn-xs btn-default">-</a>
+                        <p class="rate"><strong>{{ 1/(interval/1000) }} Hz</strong> = {{ interval }} ms = {{ interval/1000 }} s</p>
+                    </div>
+                      <div id="scatter_chart" style="width: 100%; height: 400px;"></div>
+                  </div>
+                  <div class="col-sm-6 box" ng-controller="BarChartCtrl">
+                      <h4 class="text-center" style="margin-bottom: 20px">Bar Chart</h4>
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-primary btn-xs" style="display: block; margin: 0 auto" data-toggle="modal" data-target="#optionsModal">
+                          View Options
+                      </button>
+                      <div class="controls">
+                        <a ng-click="increaseSpeed()" class="plus-minus btn btn-xs btn-default">+</a>
+                        <a ng-click="decreaseSpeed()" class="plus-minus btn btn-xs btn-default">-</a>
+                        <p class="rate"><strong>{{ 1/(interval/1000) }} Hz</strong> = {{ interval }} ms = {{ interval/1000 }} s</p>
+                    </div>
+                      <div id="bar_chart" style="width: 100%; height: 400px;"></div>
+                  </div>
+                  <div class="col-sm-6 box" ng-controller="GaugeChartCtrl">
+                      <h4 class="text-center" style="margin-bottom: 20px">Gauge Chart</h4>
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-primary btn-xs" style="display: block; margin: 0 auto" data-toggle="modal" data-target="#optionsModal">
+                          View Options
+                      </button>
+                      <div class="controls">
+                        <a ng-click="increaseSpeed()" class="plus-minus btn btn-xs btn-default">+</a>
+                        <a ng-click="decreaseSpeed()" class="plus-minus btn btn-xs btn-default">-</a>
+                        <p class="rate"><strong>{{ 1/(interval/1000) }} Hz</strong> = {{ interval }} ms = {{ interval/1000 }} s</p>
+                    </div>
+                      <p style="height: 90px"></p>
+                      <div id="gauge_chart" style="width: 100%; height: 300px;"></div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="col-sm-2">
+              <p class="lead" style="margin-left: 5px"> Data Sources</p>
+              <div class="list-group">
+                  <a href="#" class="list-group-item">data source 1</a>
+                  <a href="#" class="list-group-item">data source 2</a>
+                  <a href="#" class="list-group-item">data source 3</a>
+                  <a href="#" class="list-group-item">data source 4</a>
+                  <a href="#" class="list-group-item">data source 5</a>
+              </div>
+          </div>
+
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="optionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Scatter Chart Options</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p>option 1</p>
+                      <p>option 2</p>
+                      <p>option 3</p>
+                      <p>option 4</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+  <!-- /.container -->
+
+  <div class="container">
+
+      <hr>
+
+      <!-- Footer -->
+      <footer>
+          <div class="row">
+              <div class="col-lg-12">
+                  <p>Copyright &copy; Your Website 2014</p>
+              </div>
+          </div>
+      </footer>
+
+  </div>
+  <!-- /.container -->
+
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="js/app.js"></script>
@@ -16,5 +183,11 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+
+  <!-- jQuery Version 1.11.0 -->
+  <script src="lib/jquery/jquery-1.11.0.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+
 </body>
 </html>
