@@ -61,11 +61,8 @@ controller('MainController', ['$scope',function($scope) {
 
   function callback() {
     if($scope.limitRange) {
-      if($scope.dataPoints < 1){
-        $scope.dataPoints = 1;
-      }
-      else if(data.getNumberOfRows() > $scope.dataPoints) {
-        while(data.getNumberOfRows() > $scope.dataPoints) {
+      if(data.getNumberOfRows() > $scope.dataPoints-1) {
+        while(data.getNumberOfRows() > $scope.dataPoints-1) {
           data.removeRow(0);
         }
       }
@@ -112,6 +109,8 @@ controller('MainController', ['$scope',function($scope) {
 /* ********************************************************* */
 .controller('ScatterChartCtrl', ['$scope',function($scope) {
   $scope.interval = 1000;
+  $scope.limitRange = true;
+  $scope.dataPoints = 8;
   var data = google.visualization.arrayToDataTable([
       ['time', 'series1'],
       [ 0,      12]
@@ -132,17 +131,24 @@ controller('MainController', ['$scope',function($scope) {
   var value, random, add, rows = 0;
 
   function callback() {
-      //var d = new Date();
-      rows = data.getNumberOfRows();
-      //data.removeRow(rows);
-      random = Math.round(6 * Math.random());
-      value = parseInt(data.getFormattedValue(rows-1,1));
-      value = add ? value + random : value - random;
-      data.addRow([counter, value]);
-      chart.draw(data, options);
-      counter ++;
-      add = !add;
-      setTimeout(callback, $scope.interval);
+    if($scope.limitRange) {
+      if(data.getNumberOfRows() > $scope.dataPoints) {
+        while(data.getNumberOfRows() > $scope.dataPoints) {
+          data.removeRow(0);
+        }
+      }
+    }
+    //var d = new Date();
+    rows = data.getNumberOfRows();
+    //data.removeRow(rows);
+    random = Math.round(6 * Math.random());
+    value = parseInt(data.getFormattedValue(rows-1,1));
+    value = add ? value + random : value - random;
+    data.addRow([counter, value]);
+    chart.draw(data, options);
+    counter ++;
+    add = !add;
+    setTimeout(callback, $scope.interval);
   }
 
   setTimeout( callback, $scope.interval );
