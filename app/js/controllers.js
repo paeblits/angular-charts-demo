@@ -118,8 +118,8 @@ controller('MainController', ['$scope',function($scope) {
 
   var options = {
       title: 'Time vs. Amount comparison',
-      hAxis: {title: 'time', minValue: 0, maxValue: 15},
-      vAxis: {title: 'amount', minValue: 0, maxValue: 15},
+      // hAxis: {title: 'time', minValue: 0, maxValue: 15},
+      // vAxis: {title: 'amount', minValue: 0, maxValue: 15},
       legend: 'none'
   };
 
@@ -130,18 +130,19 @@ controller('MainController', ['$scope',function($scope) {
   var counter = 1;
   var value, random, add, rows = 0;
 
+  // if limitRange is checked, remove the rows from the data
   function callback() {
     if($scope.limitRange) {
+      // before deleting check how many data points we want
       if(data.getNumberOfRows() > $scope.dataPoints) {
         while(data.getNumberOfRows() > $scope.dataPoints) {
           data.removeRow(0);
         }
       }
     }
-    //var d = new Date();
+    
     rows = data.getNumberOfRows();
-    //data.removeRow(rows);
-    random = Math.round(6 * Math.random());
+    random = Math.round(2 * Math.random());
     value = parseInt(data.getFormattedValue(rows-1,1));
     value = add ? value + random : value - random;
     data.addRow([counter, value]);
@@ -202,7 +203,6 @@ controller('MainController', ['$scope',function($scope) {
 
   function callback() {
       rows = data.getNumberOfRows();
-      //data.removeRow(rows);
       value1 = parseInt(data.getFormattedValue(0,1));
       value2 = parseInt(data.getFormattedValue(0,2));
       value3 = parseInt(data.getFormattedValue(1,1));
@@ -211,7 +211,7 @@ controller('MainController', ['$scope',function($scope) {
       value6 = parseInt(data.getFormattedValue(2,2));
       value7 = parseInt(data.getFormattedValue(3,1));
       value8 = parseInt(data.getFormattedValue(3,2));
-      random = Math.round(10 * Math.random());
+      random = Math.round(20 * Math.random());
       value1 =  add ? value1 + random : value1 - random;
       value2 = !add ? value2 + random : value2 - random;
       value3 =  add ? value3 + random : value3 - random;
