@@ -5,7 +5,7 @@ This is a demo application and a possible starting point for our senior design p
 1. Clone this repo or create a pull request if you will be contributing.
 2. Install [Node.js](http://nodejs.org/). This is how the app is currently served.
 3. Navigate to the repo directory **angular-charts-demo** on your machine and run the command:
->node scripts/web-server.js 
+'node scripts/web-server.js'
 to start the http server at **http://localhost:8000/**
 4. Go to **http://localhost:8000/app/index.html** in your browser to view the application.
 
