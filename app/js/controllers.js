@@ -41,10 +41,11 @@ controller('MainController', ['$scope',function($scope) {
 /* ********************************************************* */
 .controller('LineChartCtrl', ['$scope',function($scope) {
   $scope.interval = 1000;
+  $scope.limitRange = true;
+  $scope.dataPoints = 8;
   var data = google.visualization.arrayToDataTable([
       ['Year', 'Sales', 'Expenses'],
       ['2004',  1000,      400],
-      ['2005',  1170,      460]
   ]);
 
   var options = {
@@ -59,19 +60,29 @@ controller('MainController', ['$scope',function($scope) {
   var time;
 
   function callback() {
-      var d = new Date();
-      time = (d.getMilliseconds() * 10).toString();
-      rows = data.getNumberOfRows();
-      //data.removeRow(rows);
-      random = Math.round(100 * Math.random());
-      value1 = parseInt(data.getFormattedValue(rows-1,1));
-      value2 = parseInt(data.getFormattedValue(rows-1,2));
-      value1 = add ? value1 + random : value1 - random;
-      value2 = !add ? value2 + random : value2 - random;
-      data.addRow([time, value1, value2]);
-      chart.draw(data, options);
-      add = !add;
-      setTimeout(callback, $scope.interval);
+    if($scope.limitRange) {
+      if($scope.dataPoints < 1){
+        $scope.dataPoints = 1;
+      }
+      else if(data.getNumberOfRows() > $scope.dataPoints) {
+        while(data.getNumberOfRows() > $scope.dataPoints) {
+          data.removeRow(0);
+        }
+      }
+    }
+    var d = new Date();
+    time = (d.getMilliseconds() * 10).toString();
+    rows = data.getNumberOfRows();
+    //data.removeRow(rows);
+    random = Math.round(100 * Math.random());
+    value1 = parseInt(data.getFormattedValue(rows-1,1));
+    value2 = parseInt(data.getFormattedValue(rows-1,2));
+    value1 = add ? value1 + random : value1 - random;
+    value2 = !add ? value2 + random : value2 - random;
+    data.addRow([time, value1, value2]);
+    chart.draw(data, options);
+    add = !add;
+    setTimeout(callback, $scope.interval);
   }
 
   setTimeout( callback, $scope.interval );

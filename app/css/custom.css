@@ -28,6 +28,29 @@ footer {
 }
 
 .controls {
-  margin: 10px 20px;
+    display: inline;
+    width: 50px;
+    margin: 10px auto;
 }
+
+.rate {
+    width: 100%;
+    text-align: -webkit-right;
+}
+
+.options {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.input-data {
+    display: inline-block;
+    width: 50px;
+}
+
+.input-range {
+    display: inline-block;
+    width: 25px;
+}
+
 

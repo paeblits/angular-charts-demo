@@ -8,4 +8,4 @@ This is a demo application and a possible starting point for our senior design p
 4. Go to *http://localhost:8000/app/index.html* in your browser to view the application.
 
 ###Notes
--This app utilizes an older version of [Angular Seed](https://github.com/angular/angular-seed). The reason for this is that the newest version has been heavily modified. It is possible to update to the newest version of Seed but that will require more Angular expertise and possibly heavy refactoring.
+This app utilizes an older version of [Angular Seed](https://github.com/angular/angular-seed). The reason for this is that the newest version has been heavily modified. It is possible to update to the newest version of Seed but that will require more Angular expertise and possibly heavy refactoring.
